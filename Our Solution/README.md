@@ -44,7 +44,7 @@ gcc main.c primes.c -o prime_app
 ```
 #### 2 Compile the Interface (Menu):
 ```bash
-gcc interface.c -o run_interface
+gcc run.c -o run_interface
 ```
 
 ### Step 3: Execute
