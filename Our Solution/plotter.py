@@ -51,7 +51,7 @@ def run_benchmark(user_start, user_end, max_cores):
     plt.savefig(filename)
     print(f"[Success] Saved: {filename}")
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     if len(sys.argv) < 4:
         run_benchmark(1000, 5000, 4)
     else:
