@@ -1,99 +1,60 @@
 # Multiprocess Prime Number Calculator
-
-## Project Documentation
-
-Submission Type: Man-Made Implementation (Modular Architecture)
-
-------------------------------------------------------------------------
+**Submission Type:** Man-Made Implementation (Modular Architecture)
 
 ## 1. Project Overview
+This project is a high-performance system designed to calculate prime numbers within a given range using **Parallel Processing**. Unlike standard scripts that run on a single processor, this solution uses the C `fork()` system call to split the workload across multiple CPU cores, minimizing execution time.
 
-This project is a high-performance system designed to calculate prime
-numbers within a given range using multiprocessing via fork().
+The system is engineered with a **Modular Architecture**, separating the User Interface, Process Management, and Mathematical Logic into distinct files for maintainability and scalability.
 
-It uses modular architecture separating:
+## 2. File Structure & Architecture
+The project consists of four main components:
 
--   User Interface
--   Process Management
--   Mathematical Logic
--   Visualization
+* **`interface.c` (The Controller):**
+    * Acts as the central dashboard/menu for the user.
+    * Compiles and executes other components based on user input.
+    * Provides a clean, text-based interface to avoid complex command-line arguments.
 
-------------------------------------------------------------------------
+* **`main.c` (The Process Manager):**
+    * Handles the Operating System level tasks: Forking, File I/O, and Timing.
+    * Splits the number range into chunks and assigns them to child processes.
+    * Merges results from temporary files into the final `prime.txt`.
 
-## 2. System Architecture
+* **`primes.c` & `primes.h` (The Logic Module):**
+    * Contains the optimized mathematical algorithm to detect prime numbers.
+    * Isolated from the OS logic to ensure clean code separation.
 
-### Controller (run.c)
+* **`plotter.py` (The Visualizer):**
+    * An automation script written in Python.
+    * Runs benchmarks on the C executable with increasing core counts.
+    * Generates a performance graph (Time vs. Cores) using `matplotlib`.
 
-Provides menu interface and executes commands safely using system().
+## 3. How to Run in WSL
 
-### Worker (main.c + primes.c)
+### Step 1: Install Dependencies
+Open your WSL terminal and run:
+```bash
+sudo apt update
+sudo apt install build-essential python3-matplotlib
+```
+### Step 2: Compile the System
+Run these two commands to build the project manually:
+#### 1 Compile the Worker (Math Engine):
+```bash
+gcc main.c primes.c -o prime_app
+```
+#### 2 Compile the Interface (Menu):
+```bash
+gcc interface.c -o run_interface
+```
 
-Handles:
+### Step 3: Execute
+Launch the main interface:
+```bash
+./run_interface
+```
 
--   fork()
--   load balancing
--   prime computation
--   file writing
--   synchronization using wait()
+## 4. Usage Guide
 
-### Mathematical Logic (primes.c)
+* Option 1 (Run Benchmark): Calculates primes in a range and saves them to prime.txt.
 
-Uses 6k ± 1 optimization to improve efficiency by reducing divisor
-checks.
-
-### Plotter (plotter.py)
-
-Runs benchmarks and generates graphs using matplotlib.
-
-------------------------------------------------------------------------
-
-## 3. File Structure
-
-Man_Made_Implementation/ - main.c - primes.c - primes.h - run.c -
-plotter.py
-
-Outputs: - prime.txt - benchmark.png
-
-------------------------------------------------------------------------
-
-## 4. Compilation
-
-Install dependencies:
-
-sudo apt update sudo apt install build-essential python3-matplotlib
-
-Compile:
-
-gcc main.c primes.c -o prime_app gcc run.c -o run
-
-Run:
-
-./run
-
-------------------------------------------------------------------------
-
-## 5. Features
-
--   multiprocessing using fork()
--   modular architecture
--   efficient prime detection
--   load balancing
--   performance visualization
-
-------------------------------------------------------------------------
-
-## 6. Concepts Used
-
--   fork()
--   wait()
--   multiprocessing
--   file I/O
--   synchronization
--   modular programming
-
-------------------------------------------------------------------------
-
-## 7. Conclusion
-
-Demonstrates real-world system programming, performance optimization,
-and modular software design.
+* Option 2 (Generate Graph): Runs the benchmark multiple times (1 to N cores) and saves a graph image (e.g., benchmark_1000_10000.png).

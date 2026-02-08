@@ -27,7 +27,7 @@ def run_benchmark(start, end, max_cores):
     plt.savefig(f"benchmark_{start}_{end}.png")
     print(f"[Success] Saved: benchmark_{start}_{end}.png")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("Usage: python3 plotter.py <start> <end> <max_cores>")
         sys.exit(1)
