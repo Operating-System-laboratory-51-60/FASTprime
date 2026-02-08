@@ -1,0 +1,3 @@
+Write a C program that accepts a range of integers (rl and rh) and a number of processes (n). The program should find all prime numbers in that range. To minimize execution time, the program must use fork() to create 'n' child processes, where each child computes primes for a specific chunk of the range. The parent process should wait for all children to finish and then merge their results into a single file named 'ai_primes.txt'.
+
+Additionally, provide a Python script to automate the compilation and execution of this C program. The script should run the C program for 1 to N cores (where N is the number of logical processors) and plot a graph of "Number of Processes vs Execution Time" using Matplotlib.
