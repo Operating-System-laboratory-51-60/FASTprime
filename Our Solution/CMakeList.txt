@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Project Name and Version
+project(PrimeBenchmark VERSION 1.0)
+
+# Specify the C Standard (C11 is good for modern features)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED True)
+
+# Add an executable called "prime_app"
+# It is built from main.c and primes.c
+add_executable(prime_app main.c primes.c)
+
+# Add compiler flags (Optimization -O2, Warnings -Wall)
+if(CMAKE_COMPILER_IS_GNUCC)
+    target_compile_options(prime_app PRIVATE -Wall -O2)
+endif()
+
+# (Optional) Custom command to run the python plotter after build
+add_custom_target(run_plot
+    COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/plotter.py 1000 10000 4
+    DEPENDS prime_app
+    COMMENT "Running the Python plotter..."
+)git add CMakeLists.txt 
+git commit -m "Added CMake build configuration"
+git push
