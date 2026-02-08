@@ -1,0 +1,9 @@
+Model: Gemini 3.0 Pro
+Date: 2026-02-08
+------------------------------------
+Input Tokens:  185 
+Output Tokens: 640 
+Total Tokens:  825
+------------------------------------
+Processing Time: 2.34s
+Finish Reason: STOP
