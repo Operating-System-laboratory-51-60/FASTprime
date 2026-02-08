@@ -21,6 +21,4 @@ add_custom_target(run_plot
     COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/plotter.py 1000 10000 4
     DEPENDS prime_app
     COMMENT "Running the Python plotter..."
-)git add CMakeLists.txt 
-git commit -m "Added CMake build configuration"
-git push
+)
